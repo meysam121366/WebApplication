@@ -9,9 +9,11 @@ namespace WebApplication.Models
 {
     public class Step
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int StepID { get; set; }
       
-        [ForeignKey("Project")]
+        //[ForeignKey("Project")]
         public int ProjectID { get; set; }
         public string Name { get; set; }
         public string Info { get; set; }

@@ -39,22 +39,37 @@ namespace WebApplication.Controllers
         // GET: Project/Create
         public ActionResult Create()
         {
-            return View();
+            var project = new Project();
+            project.Steps = new List<Step>();
+          
+            return View(project);
         }
 
-        // POST: Project/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProjectID,Name,Description")] Project project)
+        public ActionResult Create([Bind(Include = "ProjectID,Name,Description")] Project project, string[] StepNames, string[] Infos)
         {
-            if (ModelState.IsValid)
-            {
+  
+                project.Steps = new List<Step>(); 
+                for (int i = 0; i < StepNames.Length; i++)
+                {
+                    if (!string.IsNullOrEmpty(StepNames[i]))
+                    {
+                        Step step = new Step()
+                        {
+                            Info = Infos[i],
+                            Name = StepNames[i],
+                        };
+                        project.Steps.Add(step);
+                    }
+                }
+
+           
                 db.Projects.Add(project);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+               // return RedirectToAction("Index");
+            
 
             return View(project);
         }
@@ -74,9 +89,6 @@ namespace WebApplication.Controllers
             return View(project);
         }
 
-        // POST: Project/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ProjectID,Name,Description")] Project project)

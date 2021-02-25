@@ -13,8 +13,10 @@ namespace WebApplication.Models
         public Project()
         {
             this.Employees = new HashSet<Employee>();
+            Steps = new List<Step>();
         }
 
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ProjectID { get; set; }
         [DisplayName("Nazwa")]
@@ -23,7 +25,7 @@ namespace WebApplication.Models
         [DisplayName("Opis")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
-        public virtual ICollection<Step> Step { get; set; }
+        public virtual ICollection<Step> Steps { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<Assignment> Assignments { get; set; }
     }
