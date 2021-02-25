@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
@@ -22,12 +23,12 @@ namespace WebApplication.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-       //     modelBuilder.Entity<Project>()
-       //.HasMany<Employee>(c => c.Employees).WithMany(i => i.Projects)
-       //.Map(t => t.MapLeftKey("ProjectID")
-       //    .MapRightKey("EmployeeID")
-       //    .ToTable("Assignment"));
-           
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Project>().Property(c => c.ProjectID)
+           .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<Step>().Property(c => c.StepID)
+           .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
     }

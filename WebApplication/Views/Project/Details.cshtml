@@ -26,7 +26,7 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Step)
+            @Html.DisplayNameFor(model => model.Steps)
         </dt>
         <dd>
             <table class="table">
@@ -34,7 +34,7 @@
                     <th>ToDo</th>
 
                 </tr>
-                @foreach (var item in Model.Step)
+                @foreach (var item in Model.Steps)
                 {
             <tr>
                 
