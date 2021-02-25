@@ -7,7 +7,7 @@
 <h2>Dodaj</h2>
 
 
-@using (Html.BeginForm("Index", "Project", FormMethod.Post, new { id = "myform" }))
+@using (Html.BeginForm("Create", "Project", FormMethod.Post, new { id = "myform" }))
 {
     @Html.AntiForgeryToken()
 
